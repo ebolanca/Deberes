@@ -1,0 +1,22 @@
+{
+  "name": "deberes",
+  "version": "1.0.0",
+  "description": "Portal interactivo de estudio y deberes para 5º de Primaria",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "sync-version": "node scripts/sync_version.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "keywords": [
+    "educacion",
+    "primaria",
+    "mapas",
+    "espana",
+    "deberes"
+  ],
+  "author": "Roberto",
+  "license": "MIT"
+}

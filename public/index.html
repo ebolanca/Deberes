@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="version" content="v1.0.0">
+    <title>Deberes 5º Primaria - Repaso y Mapas Interactivos</title>
+    <!-- FontAwesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- CABECERA -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-block">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Deberes 5º Primaria <span class="badge-version">v1.0.0</span></h1>
+                    <p>Repaso interactivo para exámenes y tareas diarias</p>
+                </div>
+            </div>
+
+            <div class="stats-bar">
+                <div class="stat-pill points" title="Puntos acumulados hoy">
+                    <i class="fa-solid fa-star"></i>
+                    <span id="userScore">0</span> pts
+                </div>
+                <div class="stat-pill streak" title="Racha de aciertos seguidos">
+                    <i class="fa-solid fa-fire"></i>
+                    <span id="userStreak">0</span> racha
+                </div>
+                <button id="soundToggleBtn" class="sound-toggle-btn active" title="Activar/Desactivar sonido">
+                    <i class="fa-solid fa-volume-high"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVEGACIÓN POR ASIGNATURAS -->
+    <nav class="nav-tabs-wrapper">
+        <div class="nav-tabs">
+            <button class="nav-tab sociales active" data-tab="tab-sociales">
+                <i class="fa-solid fa-earth-europe"></i>
+                <span>Ciencias Sociales (Mapa de España)</span>
+            </button>
+            <button class="nav-tab naturales" data-tab="tab-naturales">
+                <i class="fa-solid fa-flask"></i>
+                <span>Ciencias de la Naturaleza</span>
+            </button>
+            <button class="nav-tab mates" data-tab="tab-mates">
+                <i class="fa-solid fa-calculator"></i>
+                <span>Matemáticas</span>
+            </button>
+            <button class="nav-tab lengua" data-tab="tab-lengua">
+                <i class="fa-solid fa-book-bookmark"></i>
+                <span>Lengua Castellana</span>
+            </button>
+            <button class="nav-tab ingles" data-tab="tab-ingles">
+                <i class="fa-solid fa-language"></i>
+                <span>Inglés</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main-container">
+
+        <!-- ============================================== -->
+        <!-- TAB 1: CIENCIAS SOCIALES / MAPA FÍSICO ESPAÑA -->
+        <!-- ============================================== -->
+        <section id="tab-sociales" class="tab-pane active">
+            
+            <div class="controls-bar">
+                <div class="filter-group">
+                    <button class="filter-btn active" data-filter="relieve">
+                        <i class="fa-solid fa-mountain"></i> Relieve y Montañas
+                    </button>
+                    <button class="filter-btn" data-filter="rios">
+                        <i class="fa-solid fa-water"></i> Ríos y Vertientes
+                    </button>
+                    <button class="filter-btn" data-filter="costas">
+                        <i class="fa-solid fa-umbrella-beach"></i> Costas, Cabos y Golfos
+                    </button>
+                </div>
+
+                <div class="mode-selector">
+                    <button class="mode-btn active" data-mode="explorar">
+                        <i class="fa-solid fa-compass"></i> Modo Explorar
+                    </button>
+                    <button class="mode-btn" data-mode="quiz">
+                        <i class="fa-solid fa-bullseye"></i> Modo Desafío (Quiz)
+                    </button>
+                </div>
+            </div>
+
+            <div class="map-layout">
+                <!-- CONTENEDOR DEL MAPA SVG -->
+                <div class="map-container">
+                    <div class="map-svg-wrapper">
+                        <svg id="spainSvg" viewBox="0 0 850 600" class="map-svg" xmlns="http://www.w3.org/2000/svg">
+                            <!-- MAR DE FONDO -->
+                            <rect width="850" height="600" class="sea-base" rx="16" />
+
+                            <!-- ROTULACIÓN MARES -->
+                            <text x="350" y="45" fill="#475569" font-size="14" font-weight="700" letter-spacing="3">MAR CANTÁBRICO</text>
+                            <text x="50" y="270" fill="#475569" font-size="14" font-weight="700" letter-spacing="3">OCÉANO ATLÁNTICO</text>
+                            <text x="640" y="460" fill="#475569" font-size="14" font-weight="700" letter-spacing="3">MAR MEDITERRÁNEO</text>
+
+                            <!-- SILUETA DE LA PENÍNSULA IBÉRICA -->
+                            <!-- Coordenadas trazadas para reflejar la geografía de España y Portugal -->
+                            <path class="land-base" d="
+                                M 130 110 
+                                C 140 85, 175 60, 205 75 
+                                C 250 82, 300 70, 360 85 
+                                C 410 75, 450 82, 490 100 
+                                C 530 105, 600 95, 730 115 
+                                C 745 120, 742 140, 725 155 
+                                C 715 180, 705 210, 672 232 
+                                C 640 260, 620 290, 638 345 
+                                C 630 380, 600 410, 588 425 
+                                C 560 450, 530 480, 508 495 
+                                C 460 520, 380 525, 320 528 
+                                C 290 515, 270 500, 240 490 
+                                C 215 480, 210 440, 215 390 
+                                C 210 340, 200 290, 190 240 
+                                C 175 200, 160 170, 140 145 
+                                Z" />
+
+                            <!-- LÍNEA FRONTERA DE PORTUGAL (Dashed para referencia geográfica) -->
+                            <path d="M 210 160 C 215 220, 240 270, 240 370 L 220 460" fill="none" stroke="#475569" stroke-width="2" stroke-dasharray="5, 5" />
+                            <text x="175" y="320" fill="#475569" font-size="13" font-weight="700" letter-spacing="2">PORTUGAL</text>
+                            <text x="630" y="80" fill="#475569" font-size="13" font-weight="700" letter-spacing="2">FRANCIA</text>
+
+                            <!-- ISLAS BALEARES -->
+                            <g class="islas-baleares-group">
+                                <!-- Mallorca -->
+                                <path class="land-base" d="M 740 260 C 760 250, 785 265, 775 285 C 760 295, 745 280, 740 260 Z" />
+                                <!-- Menorca -->
+                                <path class="land-base" d="M 795 240 C 810 235, 815 245, 805 255 Z" />
+                                <!-- Ibiza y Formentera -->
+                                <path class="land-base" d="M 705 300 C 715 295, 720 305, 712 315 Z" />
+                                <path class="land-base" d="M 718 322 C 723 320, 725 328, 720 330 Z" />
+                                <text x="760" y="315" fill="#64748b" font-size="10" font-weight="600" text-anchor="middle">Islas Baleares</text>
+                            </g>
+
+                            <!-- RECUADRO INSET ISLAS CANARIAS -->
+                            <g class="canarias-inset">
+                                <rect x="30" y="470" width="180" height="110" fill="#0f172a" stroke="#334155" stroke-width="1.5" rx="8" />
+                                <text x="40" y="490" fill="#64748b" font-size="11" font-weight="700">ISLAS CANARIAS</text>
+                                <!-- Siluetas simplificadas de las 7 islas -->
+                                <ellipse cx="140" cy="530" rx="14" ry="10" class="land-base" /> <!-- Tenerife -->
+                                <ellipse cx="165" cy="540" rx="10" ry="10" class="land-base" /> <!-- Gran Canaria -->
+                                <ellipse cx="180" cy="510" rx="6" ry="12" class="land-base" />  <!-- Fuerteventura -->
+                                <ellipse cx="190" cy="495" rx="5" ry="10" class="land-base" />  <!-- Lanzarote -->
+                                <circle cx="115" cy="535" r="5" class="land-base" />            <!-- La Gomera -->
+                                <circle cx="95" cy="520" r="7" class="land-base" />             <!-- La Palma -->
+                                <circle cx="95" cy="550" r="4" class="land-base" />             <!-- El Hierro -->
+                                <text x="140" y="555" fill="#f59e0b" font-size="9" font-weight="700" text-anchor="middle">Teide (3.715m)</text>
+                            </g>
+
+                            <!-- CAPAS DINÁMICAS (Se rellenan por JS) -->
+                            <g id="reliefGroup"></g>
+                            <g id="riversGroup" style="display:none;"></g>
+                            <g id="coastsGroup" style="display:none;"></g>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- PANEL LATERAL DE INFORMACIÓN / RETO -->
+                <div class="info-panel">
+                    <div class="panel-header">
+                        <h2>
+                            <i class="fa-solid fa-circle-info" style="color: var(--accent);"></i>
+                            <span>Ficha de Repaso</span>
+                        </h2>
+                    </div>
+
+                    <!-- CAJA DE RETO DEL QUIZ (Oculta en modo explorar) -->
+                    <div id="targetChallengeBox" class="target-challenge-box" style="display:none;">
+                        <div class="prompt">Localiza en el mapa:</div>
+                        <div class="target-name">Cargando...</div>
+                        <div class="hint">🔍 Pista...</div>
+                    </div>
+
+                    <!-- MENSAJE DE FEEDBACK (Acierto/Error) -->
+                    <div id="feedbackBox" class="feedback-box"></div>
+
+                    <!-- DETALLES DEL ELEMENTO EN MODO EXPLORAR -->
+                    <div id="itemDetailCard" class="item-detail-card">
+                        <div style="text-align: center; color: var(--text-muted); padding: 20px 0;">
+                            <i class="fa-solid fa-hand-pointer" style="font-size: 2rem; margin-bottom: 12px; color: var(--accent);"></i>
+                            <p><strong>Modo Exploración activo</strong></p>
+                            <p style="font-size: 0.85rem; margin-top: 6px;">Pulsa sobre cualquier elemento del mapa (cordillera, río o cabo) para ver su información de examen.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- TAB 2: CIENCIAS DE LA NATURALEZA -->
+        <!-- ============================================== -->
+        <section id="tab-naturales" class="tab-pane">
+            <div class="subject-grid">
+                <div class="subject-card" style="grid-column: 1 / -1;">
+                    <div>
+                        <div class="subject-card-header">
+                            <div class="subject-card-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">
+                                <i class="fa-solid fa-dna"></i>
+                            </div>
+                            <div>
+                                <h3>Test de Ecosistemas y el Cuerpo Humano</h3>
+                                <p style="color: var(--text-muted); font-size: 0.88rem;">Preguntas oficiales del currículo de 5º de Primaria</p>
+                            </div>
+                        </div>
+                        <div id="naturalesQuizContainer" class="quiz-container">
+                            <!-- Inyectado por JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- TAB 3: MATEMÁTICAS -->
+        <!-- ============================================== -->
+        <section id="tab-mates" class="tab-pane">
+            <div class="subject-grid">
+                <!-- Tarjeta 1: Cálculo Mental Rápido -->
+                <div class="subject-card">
+                    <div>
+                        <div class="subject-card-header">
+                            <div class="subject-card-icon" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b;">
+                                <i class="fa-solid fa-bolt"></i>
+                            </div>
+                            <div>
+                                <h3>Gimnasio de Cálculo Mental</h3>
+                                <p style="color: var(--text-muted); font-size: 0.88rem;">¡Responde tan rápido como puedas!</p>
+                            </div>
+                        </div>
+                        <div class="calc-display" id="calcDisplay">24 + 38 = ?</div>
+                        <div class="calc-input-row">
+                            <input type="number" id="calcInput" class="calc-input" placeholder="Tu resultado..." />
+                            <button id="calcSubmitBtn" class="btn-primary">Comprobar</button>
+                        </div>
+                        <div id="calcFeedback" class="feedback-box" style="margin-top: 14px;"></div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 2: Fracciones visuales -->
+                <div class="subject-card">
+                    <div>
+                        <div class="subject-card-header">
+                            <div class="subject-card-icon" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8;">
+                                <i class="fa-solid fa-pizza-slice"></i>
+                            </div>
+                            <div>
+                                <h3>Fracciones y Proporciones</h3>
+                                <p style="color: var(--text-muted); font-size: 0.88rem;">Conceptos clave de fracciones</p>
+                            </div>
+                        </div>
+                        <div style="background: rgba(0, 0, 0, 0.2); border-radius: 12px; padding: 18px; font-size: 0.95rem;">
+                            <p style="margin-bottom: 10px;">📌 <strong>Fracción propia:</strong> El numerador es menor que el denominador (ej. 3/5).</p>
+                            <p style="margin-bottom: 10px;">📌 <strong>Fracción impropia:</strong> El numerador es mayor que el denominador (ej. 7/4).</p>
+                            <p>📌 <strong>Fracciones equivalentes:</strong> Representan la misma cantidad (ej. 1/2 = 2/4 = 4/8).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- TAB 4: LENGUA CASTELLANA -->
+        <!-- ============================================== -->
+        <section id="tab-lengua" class="tab-pane">
+            <div class="subject-grid">
+                <div class="subject-card" style="grid-column: 1 / -1;">
+                    <div>
+                        <div class="subject-card-header">
+                            <div class="subject-card-icon" style="background: rgba(168, 85, 247, 0.15); color: #a855f7;">
+                                <i class="fa-solid fa-spell-check"></i>
+                            </div>
+                            <div>
+                                <h3>El Reto de la Acentuación: ¿Aguda, Llana o Esdrújula?</h3>
+                                <p style="color: var(--text-muted); font-size: 0.88rem;">Identifica dónde lleva la fuerza la palabra y pulsa su categoría</p>
+                            </div>
+                        </div>
+
+                        <div class="word-drop-box" id="lenguaWordBox">Árbol</div>
+
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-top: 16px;">
+                            <button class="filter-btn lengua-type-btn" data-type="aguda" style="justify-content: center; padding: 14px; font-size: 1rem;">
+                                🎯 AGUDA (Última sílaba)
+                            </button>
+                            <button class="filter-btn lengua-type-btn" data-type="llana" style="justify-content: center; padding: 14px; font-size: 1rem;">
+                                ⚖️ LLANA (Penúltima sílaba)
+                            </button>
+                            <button class="filter-btn lengua-type-btn" data-type="esdrujula" style="justify-content: center; padding: 14px; font-size: 1rem;">
+                                🚀 ESDRÚJULA (Antepenúltima)
+                            </button>
+                        </div>
+
+                        <div id="lenguaFeedback" class="feedback-box" style="margin-top: 18px;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- TAB 5: INGLÉS -->
+        <!-- ============================================== -->
+        <section id="tab-ingles" class="tab-pane">
+            <div class="subject-grid">
+                <div class="subject-card">
+                    <div>
+                        <div class="subject-card-header">
+                            <div class="subject-card-icon" style="background: rgba(236, 72, 153, 0.15); color: #ec4899;">
+                                <i class="fa-solid fa-comments"></i>
+                            </div>
+                            <div>
+                                <h3>Vocabulario & Flashcards</h3>
+                                <p style="color: var(--text-muted); font-size: 0.88rem;">Toca la tarjeta para ver la traducción</p>
+                            </div>
+                        </div>
+
+                        <div id="englishCard" style="background: rgba(0, 0, 0, 0.3); border: 2px dashed rgba(236, 72, 153, 0.4); border-radius: 14px; padding: 30px; text-align: center; cursor: pointer; user-select: none; transition: transform 0.2s;">
+                            <!-- Inyectado por JS -->
+                        </div>
+
+                        <div style="text-align: center; margin-top: 16px;">
+                            <button id="englishNextBtn" class="btn-primary" style="background: linear-gradient(135deg, #ec4899, #8b5cf6);">
+                                Siguiente palabra <i class="fa-solid fa-arrow-right" style="margin-left: 6px;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>🎓 Deberes 5º Primaria — Servidor OMEN &bull; Desarrollado para repaso escolar sin distracciones</p>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="js/mapa-fisico.js"></script>
+    <script src="js/materias.js"></script>
+</body>
+</html>
